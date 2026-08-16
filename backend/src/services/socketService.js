@@ -26,9 +26,14 @@ function init(httpServer) {
         return next(new Error('Authentication failed: Missing token.'));
       }
 
+      if (!process.env.JWT_SECRET) {
+        logger.error('JWT_SECRET environment variable is missing or unconfigured.');
+        return next(new Error('Authentication failed: Server configuration error (JWT_SECRET is missing).'));
+      }
+
       const decoded = jwt.verify(
         token,
-        process.env.JWT_SECRET || 'super_secret_social_media_analytics_key_2026'
+        process.env.JWT_SECRET
       );
 
       const user = await prisma.user.findUnique({

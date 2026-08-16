@@ -97,6 +97,12 @@ async function registerUser(payload) {
     });
   }
 
+  if (!process.env.JWT_SECRET) {
+    const error = new Error('Server configuration error: JWT_SECRET environment variable is missing.');
+    error.status = 500;
+    throw error;
+  }
+
   // Generate JWT token
   const token = jwt.sign(
     { 
@@ -106,7 +112,7 @@ async function registerUser(payload) {
       accountType: user.accountType,
       organizationId: user.organizationId
     },
-    process.env.JWT_SECRET || 'super_secret_social_media_analytics_key_2026',
+    process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES_IN || '24h' }
   );
 
@@ -154,6 +160,12 @@ async function loginUser({ email, password }) {
     throw error;
   }
 
+  if (!process.env.JWT_SECRET) {
+    const error = new Error('Server configuration error: JWT_SECRET environment variable is missing.');
+    error.status = 500;
+    throw error;
+  }
+
   // Generate token
   const token = jwt.sign(
     { 
@@ -163,7 +175,7 @@ async function loginUser({ email, password }) {
       accountType: user.accountType,
       organizationId: user.organizationId
     },
-    process.env.JWT_SECRET || 'super_secret_social_media_analytics_key_2026',
+    process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES_IN || '24h' }
   );
 

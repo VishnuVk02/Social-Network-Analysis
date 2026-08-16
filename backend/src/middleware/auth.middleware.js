@@ -19,8 +19,16 @@ async function authenticate(req, res, next) {
       });
     }
 
+    if (!process.env.JWT_SECRET) {
+      logger.error('JWT_SECRET environment variable is missing or unconfigured.');
+      return res.status(500).json({
+        success: false,
+        message: 'Server configuration error: JWT_SECRET is missing.'
+      });
+    }
+
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'super_secret_social_media_analytics_key_2026');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
     // Check if user still exists in database
     const user = await prisma.user.findUnique({
