@@ -1,0 +1,61 @@
+================================================================================
+          CROSS-PLATFORM TRENDS INDEX PAGE - ARCHITECTURE AND USAGE
+================================================================================
+
+OVERVIEW
+--------------------------------------------------------------------------------
+The Trends Index page is a cross-platform trend discovery dashboard for 
+YouTube and GitHub telemetry in the Social Media Analytics Platform.
+
+The core architecture follows the concept:
+CATEGORY  -->  TOPICS  -->  CROSS-PLATFORM TREND ANALYSIS
+
+SUPPORTED PLATFORMS
+--------------------------------------------------------------------------------
+- YouTube (video mentions, views, channel activity, comments, keyword signals)
+- GitHub (repository stars, forks, language activity, trends)
+
+KEY PAGE SECTIONS & CONTROLS
+--------------------------------------------------------------------------------
+1. Header & Filter Controls:
+   - Category Dropdown: Filter by Technology, Artificial Intelligence, Software 
+     Development, Cloud & DevOps, Programming, Startups & Business, Gaming, 
+     Science, Education. (Default: Technology)
+   - Source Dropdown: Combined (YouTube + GitHub), YouTube Only, GitHub Only. (Default: Combined)
+   - Time Range Dropdown: Last 24 Hours, Last 7 Days, Last 30 Days. (Default: Last 7 Days)
+
+2. Overview Summary Cards:
+   - Trending Topics Count
+   - Fastest Growing Topic & Velocity %
+   - Most Discussed Topic
+   - Cross-Platform Trends Count
+
+3. Top Trending Topics Leaderboard:
+   - Ranked list (#1, #2, #3...) with Category, Combined Trend Score (0-100), 
+     Growth %, YouTube Signal, GitHub Signal, and Trend Status (Rising, Growing, 
+     Stable, Declining).
+   - Rows are interactive and launch the Topic Detail Modal on click.
+
+4. Cross-Platform Trend Activity Chart:
+   - Visual comparison chart showing YouTube vs GitHub vs Combined scores.
+
+5. Trend Velocity (Fastest Rising Topics):
+   - Topics sorted by growth rate velocity with upward indicators.
+
+6. Cross-Platform Insights:
+   - Highlights topics gaining traction on BOTH YouTube and GitHub simultaneously.
+
+7. Platform Differences:
+   - Identifies YouTube Dominant topics vs GitHub Dominant topics.
+
+8. Interactive Topic Detail Modal:
+   - Granular breakdown for clicked topics featuring overall score, 7-day timeline 
+     line chart, YouTube video signals, GitHub repo signals, and related topics.
+
+COMBINED SIGNAL SCORING
+--------------------------------------------------------------------------------
+YouTube Signal = Normalized YouTube activity score (0-100)
+GitHub Signal  = Normalized GitHub activity score (0-100)
+Combined Trend Score = Weighted Score (0.55 * YouTube + 0.45 * GitHub)
+
+================================================================================

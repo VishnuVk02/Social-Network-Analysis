@@ -1,0 +1,4 @@
+# Python Dependencies for Multi-Platform Social Media Analytics Platform
+# Required for Data Flow Diagram (DFD) visualization & diagram generation (generate_dfd.py)
+
+Pillow>=10.0.0

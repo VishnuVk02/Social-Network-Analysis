@@ -1,0 +1,495 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  ANALYST
+  USER
+}
+
+enum GroupRole {
+  ADMIN
+  MEMBER
+}
+
+enum AccountType {
+  INDIVIDUAL
+  ORGANIZATION
+}
+
+enum QueryType {
+  SUBREDDIT
+  KEYWORD
+  USER
+}
+
+model User {
+  id             String               @id @default(uuid())
+  email          String               @unique
+  password       String
+  name           String
+  role           Role                 @default(USER)
+  accountType    AccountType          @default(INDIVIDUAL)
+  organizationId String?
+  organization   Organization?        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  groups                   UserGroup[]
+  sessions                 ApplicationSession[]
+  events                   ApplicationEvent[]
+  messages                 GroupMessage[]
+  conversationParticipants ConversationParticipant[]
+  privateMessages          PrivateMessage[]
+  reports                  Report[]
+
+  @@map("users")
+}
+
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  email     String?
+  type      String?
+  industry  String?
+  country   String?
+  size      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users         User[]
+  groups        Group[]
+  conversations Conversation[]
+  reports       Report[]
+
+  @@map("organizations")
+}
+
+model Group {
+  id             String       @id @default(uuid())
+  name           String
+  description    String?
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  members        UserGroup[]
+  savedQueries   SavedQuery[]
+  messages       GroupMessage[]
+
+  @@map("groups")
+}
+
+model UserGroup {
+  id        String    @id @default(uuid())
+  userId    String
+  groupId   String
+  role      GroupRole @default(MEMBER)
+  joinedAt  DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group     Group     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, groupId])
+  @@map("user_groups")
+}
+
+model SavedQuery {
+  id        String    @id @default(uuid())
+  type      QueryType
+  query     String    // e.g. "reactjs", "AI", "spez"
+  groupId   String
+  group     Group     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+
+  @@map("saved_queries")
+}
+
+model SubredditAnalytics {
+  id                String   @id @default(uuid())
+  subredditName     String   @unique
+  totalPosts        Int
+  totalUpvotes      Int
+  totalComments     Int
+  postingFrequency  Float    // Avg posts per day
+  sentimentPositive Float
+  sentimentNeutral  Float
+  sentimentNegative Float
+  activeAuthors     Json     // List of active authors with post count
+  popularPosts      Json     // List of top posts by score
+  trendingKeywords  Json     // List of word frequency counts
+  engagementHistory Json     // Chart timeline of posts/upvotes
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("subreddit_analytics")
+}
+
+model KeywordAnalytics {
+  id                  String   @id @default(uuid())
+  keyword             String   @unique
+  totalPosts          Int
+  avgUpvotes          Float
+  avgComments         Float
+  sentimentPositive   Float
+  sentimentNeutral    Float
+  sentimentNegative   Float
+  trendingDiscussions Json     // Top posts discussing this keyword
+  keywordFrequency    Json     // Related keywords frequency list
+  engagementHistory   Json     // Timeline of engagement
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@map("keyword_analytics")
+}
+
+model UserAnalytics {
+  id                String   @id @default(uuid())
+  username          String   @unique
+  karma             Int
+  accountCreated    DateTime
+  totalPosts        Int
+  totalComments     Int
+  activityTimeline  Json     // Activity grouped by date/hour
+  topPosts          Json     // List of highest performing posts
+  engagementStats   Json     // Overall user stats
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("user_analytics")
+}
+
+model TrendingKeyword {
+  id         String   @id @default(uuid())
+  keyword    String   @unique
+  volume     Int
+  growthRate Float
+  updatedAt  DateTime @default(now())
+
+  @@map("trending_keywords")
+}
+
+model YoutubeChannel {
+  id               String   @id @default(uuid())
+  youtubeChannelId String   @unique
+  name             String
+  description      String?
+  subscriberCount  Float
+  viewCount        Float
+  videoCount       Int
+  thumbnail        String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  videos           YoutubeVideo[]
+  snapshots        YoutubeAnalyticsSnapshot[]
+  trendingKeywords YoutubeTrendingKeyword[]
+
+  @@map("youtube_channels")
+}
+
+model YoutubeVideo {
+  id             String   @id @default(uuid())
+  youtubeVideoId String   @unique
+  channelId      String
+  title          String
+  description    String?
+  views          Float
+  likes          Float
+  comments       Float
+  publishedAt    DateTime
+  thumbnail      String?
+  createdAt      DateTime @default(now())
+  
+  channel        YoutubeChannel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  videoComments  YoutubeComment[]
+
+  @@map("youtube_videos")
+}
+
+model YoutubeComment {
+  id               String   @id @default(uuid())
+  youtubeCommentId String   @unique
+  videoId          String
+  author           String
+  content          String
+  sentiment        String   // "POSITIVE", "NEUTRAL", "NEGATIVE"
+  publishedAt      DateTime
+  createdAt        DateTime @default(now())
+
+  video            YoutubeVideo @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@map("youtube_comments")
+}
+
+model YoutubeTrendingKeyword {
+  id         String   @id @default(uuid())
+  keyword    String
+  frequency  Int
+  channelId  String
+  createdAt  DateTime @default(now())
+
+  channel    YoutubeChannel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@map("youtube_trending_keywords")
+}
+
+model YoutubeAnalyticsSnapshot {
+  id              String   @id @default(uuid())
+  channelId       String
+  averageViews    Float
+  averageLikes    Float
+  averageComments Float
+  engagementRate  Float
+  capturedAt      DateTime @default(now())
+
+  channel         YoutubeChannel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@map("youtube_analytics_snapshots")
+}
+
+model GithubRepository {
+  id           String              @id @default(uuid())
+  repoId       String              @unique
+  name         String
+  owner        String
+  description  String?
+  stars        Int
+  forks        Int
+  watchers     Int
+  openIssues   Int
+  language     String?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  
+  contributors GithubContributor[]
+  snapshots    GithubSnapshot[]
+
+  @@map("github_repositories")
+}
+
+model GithubContributor {
+  id           String           @id @default(uuid())
+  githubUserId String
+  username     String
+  contributions Int
+  repositoryId String
+  repository   GithubRepository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@map("github_contributors")
+}
+
+model GithubSnapshot {
+  id           String           @id @default(uuid())
+  repositoryId String
+  stars        Int
+  forks        Int
+  watchers     Int
+  openIssues   Int
+  capturedAt   DateTime         @default(now())
+  repository   GithubRepository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@map("github_snapshots")
+}
+
+model GithubTrend {
+  id                String   @id @default(uuid())
+  repoName          String   @unique
+  owner             String
+  stars             Int
+  forks             Int
+  language          String?
+  description       String?
+  repoUrl           String
+  intelligenceScore Float
+  updatedAt         DateTime @updatedAt
+
+  @@map("github_trends")
+}
+
+model GithubNews {
+  id          String   @id @default(uuid())
+  title       String
+  content     String
+  type        String   // "RELEASE", "UPDATE", "TRENDING"
+  repoName    String?
+  url         String?
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  @@map("github_news")
+}
+
+model GithubDeveloper {
+  id                 String   @id @default(uuid())
+  username           String   @unique
+  name               String?
+  avatarUrl          String?
+  followers          Int
+  publicRepos        Int
+  popularRepoName    String?
+  popularRepoUrl     String?
+  popularRepoStars   Int      @default(0)
+  updatedAt          DateTime @updatedAt
+
+  @@map("github_developers")
+}
+
+model GithubRepositorySnapshot {
+  id                String   @id @default(uuid())
+  repoName          String
+  stars             Int
+  forks             Int
+  watchers          Int
+  contributorsCount Int
+  capturedAt        DateTime @default(now())
+
+  @@map("github_repository_snapshots")
+}
+
+model GithubLanguageTrend {
+  id           String   @id @default(uuid())
+  languageName String
+  frequency    Int
+  trendScore   Float
+  capturedAt   DateTime @default(now())
+
+  @@map("github_language_trends")
+}
+
+model ApplicationSession {
+  id             String             @id @default(uuid())
+  userId         String
+  user           User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  startedAt      DateTime           @default(now())
+  lastActivityAt DateTime           @default(now())
+  endedAt        DateTime?
+  duration       Int                @default(0)
+  createdAt      DateTime           @default(now())
+  events         ApplicationEvent[]
+
+  @@index([userId])
+  @@index([startedAt])
+  @@index([lastActivityAt])
+  @@map("application_sessions")
+}
+
+model ApplicationEvent {
+  id          String              @id @default(uuid())
+  userId      String
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessionId   String?
+  session     ApplicationSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+  eventType   String
+  feature     String
+  platform    String?
+  metadata    Json?
+  createdAt   DateTime            @default(now())
+
+  @@index([userId])
+  @@index([sessionId])
+  @@index([eventType])
+  @@index([feature])
+  @@index([createdAt])
+  @@map("application_events")
+}
+
+model GroupMessage {
+  id          String   @id @default(uuid())
+  groupId     String
+  senderId    String
+  content     String
+  messageType String   @default("TEXT")
+  reportData  Json?
+  isDeleted   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  group  Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  sender User  @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([groupId])
+  @@index([senderId])
+  @@index([createdAt])
+  @@map("group_messages")
+}
+
+model Conversation {
+  id             String                    @id @default(uuid())
+  organizationId String
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
+
+  organization Organization              @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  participants ConversationParticipant[]
+  messages     PrivateMessage[]
+
+  @@index([organizationId])
+  @@map("conversations")
+}
+
+model ConversationParticipant {
+  id             String       @id @default(uuid())
+  conversationId String
+  userId         String
+  joinedAt       DateTime     @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@index([userId])
+  @@index([conversationId])
+  @@map("conversation_participants")
+}
+
+model PrivateMessage {
+  id             String       @id @default(uuid())
+  conversationId String
+  senderId       String
+  content        String
+  messageType    String       @default("TEXT")
+  reportData     Json?
+  isDeleted      Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+  @@index([senderId])
+  @@index([createdAt])
+  @@map("private_messages")
+}
+
+model Report {
+  id              String        @id @default(uuid())
+  title           String
+  description     String?
+  reportType      String        // "GITHUB", "YOUTUBE", "TRENDS", "COMBINED"
+  sourcePlatform  String        // "GitHub", "YouTube", "Trends", "Cross-Platform"
+  targetReference String        // e.g. "facebook/react", "UC6nSFpj9rGIc61i555WnetA", "AI"
+  status          String        @default("READY") // "DRAFT", "GENERATING", "READY", "FAILED"
+  visibility      String        @default("PRIVATE") // "PRIVATE", "ORGANIZATION"
+  sections        Json?
+  reportData      Json          // Structured snapshot containing summary, metrics, charts, top items, insights
+  createdById     String
+  organizationId  String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  createdBy    User          @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([createdById])
+  @@index([organizationId])
+  @@index([reportType])
+  @@index([createdAt])
+  @@map("reports")
+}
+

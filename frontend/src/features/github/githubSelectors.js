@@ -1,0 +1,11 @@
+export const selectGithubState = (state) => state.github;
+export const selectGithubRepository = (state) => state.github.repository;
+export const selectGithubUser = (state) => state.github.user;
+export const selectGithubOrganization = (state) => state.github.organization;
+export const selectGithubTrending = (state) => state.github.trending;
+export const selectGithubNews = (state) => state.github.news;
+export const selectGithubLanguages = (state) => state.github.languages;
+export const selectTopDevelopers = (state) => state.github.topDevelopers;
+export const selectGithubInsights = (state) => state.github.insights;
+export const selectGithubLoading = (state) => state.github.isLoading;
+export const selectGithubError = (state) => state.github.error;
