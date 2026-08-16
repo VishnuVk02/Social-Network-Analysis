@@ -36,7 +36,9 @@ import {
   TrendingUp,
   ExternalLink,
   BarChart2,
-  Forward
+  Forward,
+  AlertCircle,
+  ChevronUp
 } from 'lucide-react';
 
 export default function MessagesPage() {
@@ -287,23 +289,22 @@ export default function MessagesPage() {
   );
 
   return (
-    <div className="p-4 sm:p-8 space-y-6 max-w-7xl mx-auto text-slate-300">
+    <div className="p-4 sm:p-8 space-y-6 w-full max-w-[1700px] mx-auto min-h-full bg-white text-slate-900">
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center space-y-3 sm:space-y-0 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center space-y-3 sm:space-y-0 border-b border-slate-200 pb-4">
         <div className="flex items-center space-x-3">
           <BackButton fallbackRoute="/" />
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-2">
-              <MessageSquare className="w-6 h-6 text-brand-400" />
-              <span>Private Employee Messaging</span>
+            <h1 className="text-2xl font-extrabold text-black tracking-tight">
+              Private Employee Messaging
             </h1>
-            <p className="text-xs text-slate-400">Secure 1-to-1 communication for organization employees.</p>
+            <p className="text-slate-700 text-xs font-bold mt-0.5">Secure 1-to-1 communication for organization employees.</p>
           </div>
         </div>
 
         <button
           onClick={() => setIsNewMessageModalOpen(true)}
-          className="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs shadow-glass-indigo transition-all flex items-center space-x-2 cursor-pointer w-fit"
+          className="px-4 py-2 rounded-xl bg-pine-500 hover:bg-pine-600 text-white font-bold text-xs shadow-sm transition-all flex items-center space-x-2 cursor-pointer w-fit"
         >
           <Plus className="w-4 h-4" />
           <span>New Message</span>
@@ -314,7 +315,7 @@ export default function MessagesPage() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-[650px]">
         {/* LEFT COLUMN: Conversation List */}
         <div
-          className={`md:col-span-4 glass-panel rounded-2xl border border-slate-800/80 overflow-hidden flex flex-col ${
+          className={`md:col-span-4 bg-midnight-800 rounded-2xl border border-midnight-700/60 overflow-hidden flex flex-col text-white shadow-sm ${
             mobileView === 'chat' ? 'hidden md:flex' : 'flex'
           }`}
         >
@@ -402,7 +403,7 @@ export default function MessagesPage() {
 
         {/* RIGHT COLUMN: Active Chat Thread */}
         <div
-          className={`md:col-span-8 glass-panel rounded-2xl border border-slate-800/80 overflow-hidden flex flex-col relative ${
+          className={`md:col-span-8 bg-midnight-800 rounded-2xl border border-midnight-700/60 overflow-hidden flex flex-col relative text-white shadow-sm ${
             mobileView === 'list' ? 'hidden md:flex' : 'flex'
           }`}
         >
@@ -441,8 +442,9 @@ export default function MessagesPage() {
 
               {/* Error banner */}
               {error && (
-                <div className="p-2.5 bg-red-500/10 border-b border-red-500/20 text-red-400 text-xs text-center font-semibold">
-                  ⚠️ {error}
+                <div className="p-2.5 bg-coral-500/10 border-b border-coral-500/20 text-coral-400 text-xs text-center font-semibold flex items-center justify-center space-x-1.5">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{error}</span>
                 </div>
               )}
 
@@ -450,7 +452,7 @@ export default function MessagesPage() {
               <div
                 ref={scrollContainerRef}
                 onScroll={handleScroll}
-                className="flex-1 p-6 overflow-y-auto space-y-4 bg-slate-950/30"
+                className="flex-1 p-6 overflow-y-auto space-y-4 bg-midnight-950/40"
               >
                 {/* Load older messages button */}
                 {hasMore && (
@@ -458,9 +460,10 @@ export default function MessagesPage() {
                     <button
                       onClick={handleLoadOlder}
                       disabled={isLoadingOlder}
-                      className="px-3 py-1.5 text-xs font-semibold text-brand-400 bg-brand-500/10 hover:bg-brand-500/20 border border-brand-500/20 rounded-xl transition-all disabled:opacity-50 cursor-pointer"
+                      className="px-3 py-1.5 text-xs font-semibold text-pine-400 bg-pine-500/10 hover:bg-pine-500/20 border border-pine-500/20 rounded-xl transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center mx-auto space-x-1"
                     >
-                      {isLoadingOlder ? 'Loading older messages...' : '↑ Load older messages'}
+                      <ChevronUp className="w-3.5 h-3.5" />
+                      <span>{isLoadingOlder ? 'Loading older messages...' : 'Load older messages'}</span>
                     </button>
                   </div>
                 )}

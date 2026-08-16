@@ -34,21 +34,16 @@ export default function Login() {
   const isExpired = searchParams.get('expired') === 'true';
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden select-none bg-dark-950">
+    <div className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden select-none bg-midnight-900">
       {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-midnight-500/20 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pine-500/15 rounded-full blur-[100px] pointer-events-none"></div>
 
-      <div className="w-full max-w-md glass-panel p-8 md:p-10 rounded-3xl shadow-2xl relative z-10 space-y-6">
+      <div className="w-full max-w-md glass-panel p-8 md:p-10 rounded-3xl shadow-2xl relative z-10 space-y-6 border border-midnight-700/60 bg-midnight-900/85">
         {/* Branding header */}
-        <div className="flex flex-col items-center text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-glass-brand">
-            <BarChart3 className="w-7 h-7 text-white" />
-          </div>
-          <div>
-            <h1 className="text-2xl font-black text-white tracking-tight">Welcome to Telemetron</h1>
-            <p className="text-xs text-slate-400 mt-1">Cross-Platform Analytics & Intelligence Platform</p>
-          </div>
+        <div className="text-center space-y-1">
+          <h1 className="text-2xl font-bold text-white tracking-tight">Welcome to Telemetron</h1>
+          <p className="text-xs text-pine-300/80">Cross-Platform Analytics & Intelligence Platform</p>
         </div>
 
         {/* Warning messages */}

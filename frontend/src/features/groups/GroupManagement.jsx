@@ -23,7 +23,8 @@ import {
   ArrowRight,
   Shield,
   Layers3,
-  Search
+  Search,
+  AlertCircle
 } from 'lucide-react';
 
 export default function GroupManagement() {
@@ -84,21 +85,21 @@ export default function GroupManagement() {
   };
 
   return (
-    <div className="p-8 space-y-8 max-w-7xl mx-auto">
+    <div className="p-8 space-y-8 w-full max-w-[1700px] mx-auto min-h-full bg-white text-slate-900">
       {/* Header bar */}
-      <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:items-center md:space-y-0">
+      <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:items-center md:space-y-0 border-b border-slate-200 pb-5">
         <div className="flex items-center space-x-4">
           <BackButton fallbackRoute="/" />
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">Collaboration Groups</h1>
-            <p className="text-slate-400 text-xs">Organize organization teams, track joint application telemetry, and share analytics.</p>
+            <h1 className="text-2xl font-extrabold text-black tracking-tight">Collaboration Groups</h1>
+            <p className="text-slate-700 text-xs font-bold mt-0.5">Organize organization teams, track joint application telemetry, and share analytics.</p>
           </div>
         </div>
 
         {isOrgAdmin && (
           <button
             onClick={() => setIsCreateModalOpen(true)}
-            className="bg-brand-600 hover:bg-brand-500 text-white font-medium px-4 py-2.5 rounded-xl shadow-glass-indigo hover:shadow-indigo-500/20 transition-all flex items-center space-x-2 text-xs cursor-pointer"
+            className="bg-pine-500 hover:bg-pine-600 text-white font-bold px-4 py-2.5 rounded-xl shadow-sm transition-all flex items-center space-x-2 text-xs cursor-pointer"
           >
             <Plus className="w-4.5 h-4.5" />
             <span>Create Group</span>
@@ -108,34 +109,34 @@ export default function GroupManagement() {
 
       {/* Error / Success banners */}
       {error && (
-        <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-400 font-semibold text-center flex items-center justify-center space-x-2">
-          <span>⚠️</span>
+        <div className="p-3 rounded-xl bg-coral-500/10 border border-coral-500/20 text-xs text-coral-400 font-semibold text-center flex items-center justify-center space-x-2">
+          <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {actionSuccess && successMessage && (
-        <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400 font-semibold text-center flex items-center justify-center space-x-2">
-          <span>✓</span>
+        <div className="p-3 rounded-xl bg-pine-500/10 border border-pine-500/20 text-xs text-pine-400 font-semibold text-center flex items-center justify-center space-x-2">
+          <Check className="w-4 h-4 shrink-0" />
           <span>{successMessage}</span>
         </div>
       )}
 
       {/* TOP OVERVIEW METRICS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800/80 space-y-1">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total Groups</span>
-          <p className="text-2xl font-black text-white">{overviewMetrics?.totalGroups || 0}</p>
+        <div className="bg-midnight-800 p-5 rounded-2xl border border-midnight-700/60 space-y-1 shadow-sm text-white">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">Total Groups</span>
+          <p className="text-2xl font-bold text-white">{overviewMetrics?.totalGroups || 0}</p>
         </div>
 
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800/80 space-y-1">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total Members</span>
-          <p className="text-2xl font-black text-brand-400">{overviewMetrics?.totalMembers || 0}</p>
+        <div className="bg-midnight-800 p-5 rounded-2xl border border-midnight-700/60 space-y-1 shadow-sm text-white">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">Total Members</span>
+          <p className="text-2xl font-bold text-pine-400">{overviewMetrics?.totalMembers || 0}</p>
         </div>
 
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800/80 space-y-1">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Active Members</span>
-          <p className="text-2xl font-black text-emerald-400">{overviewMetrics?.activeMembers || 0}</p>
+        <div className="bg-midnight-800 p-5 rounded-2xl border border-midnight-700/60 space-y-1 shadow-sm text-white">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">Active Members</span>
+          <p className="text-2xl font-bold text-pine-300">{overviewMetrics?.activeMembers || 0}</p>
         </div>
 
         <div className="glass-panel p-5 rounded-2xl border border-slate-800/80 space-y-1">

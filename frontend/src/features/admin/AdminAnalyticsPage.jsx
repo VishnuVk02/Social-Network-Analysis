@@ -128,24 +128,23 @@ export default function AdminAnalyticsPage() {
   };
 
   return (
-    <div className="p-8 space-y-8 max-w-7xl mx-auto">
+    <div className="p-8 space-y-8 w-full max-w-[1700px] mx-auto min-h-full bg-white text-slate-900">
       
       {/* 1. PAGE HEADER & CONTROLS */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-800 pb-6 gap-6">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-200 pb-6 gap-6">
         <div className="flex items-center space-x-4">
           <BackButton fallbackRoute="/" />
           <div>
             <div className="flex items-center space-x-2">
-              <h1 className="text-3xl font-black text-white tracking-tight flex items-center">
-                <ShieldCheck className="w-8 h-8 mr-3 text-brand-400" />
+              <h1 className="text-3xl font-extrabold text-black tracking-tight">
                 Application Analytics
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 border border-amber-500/30 text-amber-400 uppercase tracking-wider">
-                Admin Telemetry
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pine-500/10 border border-pine-500/30 text-pine-700 uppercase tracking-wider">
+                System Admin
               </span>
             </div>
-            <p className="text-slate-400 text-sm mt-0.5">
-              Measure platform usage telemetry, session durations, active users, and feature engagement.
+            <p className="text-slate-700 text-xs font-bold mt-0.5">
+              Cross-system feature usage metrics, active user engagement telemetry, and audit event logs.
             </p>
           </div>
         </div>
@@ -448,8 +447,8 @@ export default function AdminAnalyticsPage() {
               className="p-3.5 rounded-xl bg-slate-900/50 border border-slate-800/80 flex items-center justify-between"
             >
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">
-                  ⚡
+                <div className="w-8 h-8 rounded-lg bg-pine-500/10 border border-pine-500/20 text-pine-400 flex items-center justify-center">
+                  <Zap className="w-4 h-4" />
                 </div>
                 <div>
                   <h5 className="text-xs font-bold text-white">

@@ -143,24 +143,23 @@ export default function EmployeeManagement() {
   }
 
   return (
-    <div className="p-8 space-y-8 max-w-7xl mx-auto">
+    <div className="p-8 space-y-8 w-full max-w-[1700px] mx-auto min-h-full bg-white text-slate-900">
       
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-6 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 pb-6 gap-4">
         <div className="flex items-center space-x-4">
           <BackButton fallbackRoute="/" />
           <div>
             <div className="flex items-center space-x-2">
-              <h1 className="text-3xl font-black text-white tracking-tight flex items-center">
-                <Users className="w-8 h-8 mr-3 text-emerald-400" />
+              <h1 className="text-3xl font-extrabold text-black tracking-tight">
                 Employee Management
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 uppercase tracking-wider">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pine-500/10 border border-pine-500/30 text-pine-700 uppercase tracking-wider">
                 {user?.organization?.name || 'Organization'}
               </span>
             </div>
-            <p className="text-slate-400 text-sm mt-0.5">
-              Create employee accounts, manage group assignments, and control organization access.
+            <p className="text-slate-700 text-xs font-bold mt-0.5">
+              Add employees, assign collaboration groups, and manage team access permissions.
             </p>
           </div>
         </div>

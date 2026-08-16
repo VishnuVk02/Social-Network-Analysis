@@ -176,10 +176,10 @@ const BASELINE_DATA = {
  * Calculates trend status based on growth percentage.
  */
 function calculateTrendStatus(growthRate) {
-  if (growthRate >= 35) return { label: 'Rising', icon: '🔥', code: 'RISING' };
-  if (growthRate >= 15) return { label: 'Growing', icon: '↗', code: 'GROWING' };
-  if (growthRate >= -5) return { label: 'Stable', icon: '→', code: 'STABLE' };
-  return { label: 'Declining', icon: '↘', code: 'DECLINING' };
+  if (growthRate >= 35) return { label: 'Rising', icon: 'RISING', code: 'RISING' };
+  if (growthRate >= 15) return { label: 'Growing', icon: 'GROWING', code: 'GROWING' };
+  if (growthRate >= -5) return { label: 'Stable', icon: 'STABLE', code: 'STABLE' };
+  return { label: 'Declining', icon: 'DECLINING', code: 'DECLINING' };
 }
 
 /**

@@ -146,14 +146,14 @@ export default function Settings() {
   };
 
   return (
-    <div className="p-8 space-y-8 max-w-7xl mx-auto">
+    <div className="p-8 space-y-8 w-full max-w-[1700px] mx-auto min-h-full bg-white text-slate-900">
       {/* Header */}
-      <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:items-center md:space-y-0">
+      <div className="flex flex-col space-y-4 md:flex-row md:justify-between md:items-center md:space-y-0 border-b border-slate-200 pb-5">
         <div className="flex items-center space-x-4">
           <BackButton fallbackRoute="/" />
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">System Settings</h1>
-            <p className="text-slate-400 text-sm">Configure collaborative workspaces, share group IDs, and manage accounts.</p>
+            <h1 className="text-2xl font-extrabold text-black tracking-tight">System Settings</h1>
+            <p className="text-slate-700 text-xs font-bold mt-0.5">Configure collaborative workspaces, share group IDs, and manage accounts.</p>
           </div>
         </div>
       </div>

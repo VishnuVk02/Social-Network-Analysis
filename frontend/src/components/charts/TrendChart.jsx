@@ -13,7 +13,7 @@ import {
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="glass-panel p-3 rounded-xl shadow-glass-md text-xs border border-slate-700/60 bg-dark-900/90 text-slate-300">
+      <div className="glass-panel p-3 rounded-xl shadow-glass-md text-xs border border-midnight-700 bg-midnight-900/95 text-slate-200">
         <p className="font-semibold text-white mb-1">{label}</p>
         {payload.map((item, idx) => (
           <p key={idx} className="flex justify-between space-x-4">
@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-export default function TrendChart({ data, xKey = 'date', yKey = 'upvotes', name = 'Upvotes', color = '#10b981' }) {
+export default function TrendChart({ data, xKey = 'date', yKey = 'upvotes', name = 'Upvotes', color = '#03B5AA' }) {
   return (
     <div className="w-full h-80">
       <ResponsiveContainer width="100%" height="100%">
@@ -38,7 +38,7 @@ export default function TrendChart({ data, xKey = 'date', yKey = 'upvotes', name
               <stop offset="95%" stopColor={color} stopOpacity={0}/>
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(3, 181, 170, 0.15)" vertical={false} />
           <XAxis 
             dataKey={xKey} 
             stroke="#94a3b8" 

@@ -61,32 +61,31 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="p-4 sm:p-8 space-y-6 max-w-7xl mx-auto text-slate-300">
+    <div className="p-4 sm:p-8 space-y-6 w-full max-w-[1700px] mx-auto min-h-full bg-white text-slate-900">
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row justify-between sm:items-center space-y-3 sm:space-y-0 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center space-y-3 sm:space-y-0 border-b border-slate-200 pb-4">
         <div className="flex items-center space-x-3">
           <BackButton fallbackRoute="/" />
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight flex items-center space-x-2">
-              <FileText className="w-6 h-6 text-brand-400" />
-              <span>Report History</span>
+            <h1 className="text-2xl font-extrabold text-black tracking-tight">
+              Report History
             </h1>
-            <p className="text-xs text-slate-400">View, search, download, and manage historical formal analytics reports.</p>
+            <p className="text-slate-700 text-xs font-bold mt-0.5">View, search, download, and manage historical formal analytics reports.</p>
           </div>
         </div>
       </div>
 
       {/* Search & Filter Toolbar */}
-      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 glass-panel p-4 rounded-2xl border border-slate-800/80">
+      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 bg-slate-100 p-4 rounded-2xl border border-slate-200">
         {/* Search */}
         <div className="relative flex-1 max-w-md">
-          <Search className="w-3.5 h-3.5 absolute left-3 top-3 text-slate-500" />
+          <Search className="w-3.5 h-3.5 absolute left-3 top-3 text-slate-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search saved reports by title or target entity..."
-            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl glass-input text-white bg-slate-900/80"
+            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 text-slate-900 bg-white focus:outline-none focus:border-pine-500"
           />
         </div>
 
@@ -100,10 +99,10 @@ export default function ReportsPage() {
             <button
               key={tab.id}
               onClick={() => setCategoryFilter(tab.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                 categoryFilter === tab.id
-                  ? 'bg-brand-600 text-white shadow-glass-indigo'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/40'
+                  ? 'bg-pine-500 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-black hover:bg-slate-200'
               }`}
             >
               {tab.label}

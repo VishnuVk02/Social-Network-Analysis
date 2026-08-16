@@ -57,24 +57,21 @@ export default function Sidebar({ isOpen }) {
   }
 
   return (
-    <aside className={`h-screen glass-panel flex flex-col justify-between border-r border-slate-800 text-slate-300 transition-all duration-500 ease-in-out transform shrink-0 z-50 ${
+    <aside className={`h-screen bg-midnight-800 border-r border-midnight-700/60 text-slate-200 flex flex-col justify-between transition-all duration-500 ease-in-out transform shrink-0 z-50 ${
       isOpen ? 'w-64 translate-x-0 opacity-100' : 'w-0 -translate-x-64 opacity-0 border-r-0 overflow-hidden'
     }`}>
       <div className="w-64 flex flex-col justify-between h-full">
         <div>
           {/* Brand Header */}
-          <div className="pt-6 px-6 pb-2 flex items-center space-x-3 border-b border-slate-800/80">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-glass-brand">
-              <BarChart3 className="w-5 h-5 text-white" />
-            </div>
+          <div className="pt-6 px-6 pb-4 flex items-center justify-between border-b border-midnight-700/60">
             <div>
-              <h2 className="text-base font-black text-white tracking-wider uppercase">Telemetron</h2>
-              <p className="text-[10px] text-slate-400">Analytics Intelligence</p>
+              <h2 className="text-base font-bold text-white tracking-wider uppercase">Telemetron</h2>
+              <p className="text-[10px] text-pine-300 font-medium">Analytics Intelligence</p>
             </div>
           </div>
 
           {/* Navigation */}
-          <nav className="pt-6 px-4 space-y-1">
+          <nav className="pt-6 px-4 space-y-1.5">
             {navItems.map((item) => {
               const Icon = item.icon;
               return (
@@ -82,13 +79,13 @@ export default function Sidebar({ isOpen }) {
                   key={item.name}
                   to={item.path}
                   className={({ isActive }) =>
-                    `flex items-center space-x-3 px-4 py-2.5 rounded-xl transition-all duration-200 group ${isActive
-                      ? 'bg-brand-600 text-white shadow-glass-brand font-medium'
-                      : 'hover:bg-slate-800/50 hover:text-slate-100'
+                    `flex items-center px-4 py-2.5 rounded-xl transition-all duration-200 ${isActive
+                      ? 'bg-pine-500 text-white font-bold shadow-sm'
+                      : 'hover:bg-midnight-700/60 hover:text-white text-slate-300'
                     }`
                   }
                 >
-                  <Icon className="w-4.5 h-4.5 shrink-0 group-hover:scale-105 transition-transform" />
+                  <Icon className="w-4.5 h-4.5 mr-3 shrink-0" />
                   <span className="text-xs font-semibold">{item.name}</span>
                 </NavLink>
               );
@@ -97,19 +94,21 @@ export default function Sidebar({ isOpen }) {
         </div>
 
         {/* User Session profile panel */}
-        <div className="p-4 border-t border-slate-800 bg-slate-950/40 space-y-3">
-          <div className="flex items-center space-x-3 p-1.5">
-            <UserCircle className="w-9 h-9 text-slate-400 shrink-0" />
+        <div className="p-4 border-t border-midnight-700/60 bg-midnight-900/60 space-y-3">
+          <div className="flex items-center space-x-3 p-1">
+            <div className="w-9 h-9 rounded-full border border-midnight-600 bg-midnight-900 text-white font-bold flex items-center justify-center shrink-0 text-xs">
+              {(user?.name || 'U').charAt(0).toUpperCase()}
+            </div>
             <div className="overflow-hidden">
-              <h4 className="text-xs font-bold text-white truncate">{user?.name || 'User Session'}</h4>
-              <div className="flex items-center space-x-1 mt-0.5">
+              <h4 className="text-xs font-bold text-white truncate">{user?.name || 'Nitish J'}</h4>
+              <div className="flex items-center space-x-1.5 mt-1">
                 <span className={`text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.25 rounded-md ${
-                  user?.accountType === 'ORGANIZATION' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-brand-500/20 text-brand-400 border border-brand-500/30'
+                  user?.accountType === 'ORGANIZATION' ? 'bg-pine-500/20 text-pine-300 border border-pine-500/30' : 'bg-midnight-700 text-slate-300 border border-midnight-600'
                 }`}>
-                  {user?.accountType || 'INDIVIDUAL'}
+                  {user?.accountType || 'ORGANIZATION'}
                 </span>
-                <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.25 rounded-md bg-slate-800 text-slate-300">
-                  {user?.role}
+                <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.25 rounded-md bg-midnight-700 text-slate-300">
+                  {user?.role || 'ADMIN'}
                 </span>
               </div>
             </div>
@@ -117,7 +116,7 @@ export default function Sidebar({ isOpen }) {
 
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center space-x-2 px-4 py-2 rounded-xl border border-slate-800 hover:border-rose-500/30 hover:bg-rose-500/10 hover:text-rose-400 transition-all duration-200 text-xs font-medium cursor-pointer"
+            className="w-full flex items-center justify-center space-x-2 px-4 py-2 rounded-xl border border-midnight-700 bg-midnight-900/40 hover:border-coral-500/40 hover:bg-coral-500/10 hover:text-coral-400 transition-all duration-200 text-xs font-semibold cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Sign Out Session</span>

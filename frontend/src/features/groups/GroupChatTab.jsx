@@ -26,7 +26,9 @@ import {
   TrendingUp,
   ExternalLink,
   BarChart2,
-  Forward
+  Forward,
+  AlertCircle,
+  ChevronUp
 } from 'lucide-react';
 
 export default function GroupChatTab({ group }) {
@@ -242,8 +244,8 @@ export default function GroupChatTab({ group }) {
         </div>
 
         <div className="flex items-center space-x-2">
-          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
+          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-pine-500/10 border border-pine-500/20 text-pine-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-pine-400 mr-1.5 animate-pulse"></span>
             Real-time Live
           </span>
         </div>
@@ -251,8 +253,9 @@ export default function GroupChatTab({ group }) {
 
       {/* Error alert */}
       {error && (
-        <div className="p-2.5 bg-red-500/10 border-b border-red-500/20 text-red-400 text-xs text-center font-semibold">
-          ⚠️ {error}
+        <div className="p-2.5 bg-coral-500/10 border-b border-coral-500/20 text-coral-400 text-xs text-center font-semibold flex items-center justify-center space-x-1.5">
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          <span>{error}</span>
         </div>
       )}
 
@@ -260,7 +263,7 @@ export default function GroupChatTab({ group }) {
       <div
         ref={scrollContainerRef}
         onScroll={handleScroll}
-        className="flex-1 p-6 overflow-y-auto space-y-4 bg-slate-950/30"
+        className="flex-1 p-6 overflow-y-auto space-y-4 bg-midnight-950/40"
       >
         {/* Load older messages button */}
         {hasMore && (
@@ -268,9 +271,10 @@ export default function GroupChatTab({ group }) {
             <button
               onClick={handleLoadOlder}
               disabled={isLoadingOlder}
-              className="px-3 py-1.5 text-xs font-semibold text-brand-400 bg-brand-500/10 hover:bg-brand-500/20 border border-brand-500/20 rounded-xl transition-all disabled:opacity-50 cursor-pointer"
+              className="px-3 py-1.5 text-xs font-semibold text-pine-400 bg-pine-500/10 hover:bg-pine-500/20 border border-pine-500/20 rounded-xl transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center mx-auto space-x-1"
             >
-              {isLoadingOlder ? 'Loading older messages...' : '↑ Load older messages'}
+              <ChevronUp className="w-3.5 h-3.5" />
+              <span>{isLoadingOlder ? 'Loading older messages...' : 'Load older messages'}</span>
             </button>
           </div>
         )}

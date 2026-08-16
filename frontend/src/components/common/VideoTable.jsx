@@ -26,30 +26,30 @@ export default function VideoTable({ videos }) {
 
   return (
     <div className="overflow-x-auto w-full">
-      <table className="w-full border-collapse text-left text-xs text-slate-300">
+      <table className="w-full border-collapse text-left text-xs text-slate-200">
         <thead>
-          <tr className="border-b border-slate-800/80 text-slate-400 font-bold uppercase tracking-wider bg-slate-900/20">
+          <tr className="border-b border-midnight-700/60 text-slate-300 font-semibold uppercase tracking-wider bg-midnight-800/90">
             <th className="p-4">Video Info</th>
-            <th className="p-4 text-right"><span className="flex items-center justify-end"><Eye className="w-3.5 h-3.5 mr-1" /> Views</span></th>
-            <th className="p-4 text-right"><span className="flex items-center justify-end"><Heart className="w-3.5 h-3.5 mr-1" /> Likes</span></th>
-            <th className="p-4 text-right"><span className="flex items-center justify-end"><MessageSquare className="w-3.5 h-3.5 mr-1" /> Comments</span></th>
-            <th className="p-4 text-center"><span className="flex items-center justify-center"><Calendar className="w-3.5 h-3.5 mr-1" /> Upload Date</span></th>
+            <th className="p-4 text-right"><span className="flex items-center justify-end"><Eye className="w-3.5 h-3.5 mr-1 text-pine-400" /> Views</span></th>
+            <th className="p-4 text-right"><span className="flex items-center justify-end"><Heart className="w-3.5 h-3.5 mr-1 text-coral-400" /> Likes</span></th>
+            <th className="p-4 text-right"><span className="flex items-center justify-end"><MessageSquare className="w-3.5 h-3.5 mr-1 text-pine-300" /> Comments</span></th>
+            <th className="p-4 text-center"><span className="flex items-center justify-center"><Calendar className="w-3.5 h-3.5 mr-1 text-slate-400" /> Upload Date</span></th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-800/40">
+        <tbody className="divide-y divide-midnight-700/40">
           {videos.map((video) => (
-            <tr key={video.id || video.youtubeVideoId} className="hover:bg-slate-800/20 transition-colors">
+            <tr key={video.id || video.youtubeVideoId} className="hover:bg-midnight-800/40 transition-colors">
               <td className="p-4 flex items-center space-x-3 min-w-[280px]">
                 <img
                   src={video.thumbnail || 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=120&h=67&q=80'}
                   alt={video.title}
-                  className="w-16 h-9 rounded object-cover border border-slate-800 shrink-0 shadow-glass-sm"
+                  className="w-16 h-9 rounded object-cover border border-midnight-700 shrink-0 shadow-glass-sm"
                 />
                 <div className="overflow-hidden">
-                  <h4 className="font-bold text-white truncate hover:text-brand-400 transition-colors" title={video.title}>
+                  <h4 className="font-bold text-white truncate hover:text-pine-400 transition-colors" title={video.title}>
                     {video.title}
                   </h4>
-                  <p className="text-[10px] text-slate-500 truncate mt-0.5 max-w-md">
+                  <p className="text-[10px] text-slate-400 truncate mt-0.5 max-w-md">
                     {video.description || 'No description available.'}
                   </p>
                 </div>

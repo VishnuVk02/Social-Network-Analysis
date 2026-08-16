@@ -30,8 +30,8 @@ export default function TopicDetailModal({ isOpen, onClose, topicDetail, isLoadi
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md transition-opacity">
-      <div className="glass-panel w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-slate-800 p-6 md:p-8 space-y-6 shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight-950/80 transition-opacity">
+      <div className="glass-panel w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-3xl border border-midnight-700/60 bg-midnight-900 p-6 md:p-8 space-y-6 shadow-xl relative">
         
         {/* Close Button */}
         <button

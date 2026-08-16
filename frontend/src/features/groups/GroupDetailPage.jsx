@@ -46,7 +46,8 @@ import {
   TrendingUp,
   BarChart3,
   MessageSquare,
-  Info
+  Info,
+  AlertCircle
 } from 'lucide-react';
 
 export default function GroupDetailPage() {
@@ -162,9 +163,9 @@ export default function GroupDetailPage() {
 
   if (error && !currentGroup) {
     return (
-      <div className="p-8 max-w-lg mx-auto mt-16 rounded-2xl bg-slate-900 border border-red-500/30 text-center space-y-4 shadow-2xl">
-        <div className="w-14 h-14 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 font-black text-2xl flex items-center justify-center mx-auto">
-          ⚠️
+      <div className="p-8 max-w-lg mx-auto mt-16 rounded-2xl bg-midnight-900 border border-coral-500/30 text-center space-y-4 shadow-2xl">
+        <div className="w-14 h-14 rounded-full bg-coral-500/10 border border-coral-500/20 text-coral-400 font-bold text-2xl flex items-center justify-center mx-auto">
+          <AlertCircle className="w-7 h-7" />
         </div>
         <h2 className="text-xl font-bold text-white">Group Not Accessible</h2>
         <p className="text-xs text-slate-400 leading-relaxed">{error}</p>
@@ -199,13 +200,13 @@ export default function GroupDetailPage() {
           <BackButton fallbackRoute="/groups" />
           <div className="space-y-1">
             <div className="flex items-center space-x-3">
-              <h1 className="text-2xl font-bold text-white tracking-tight">{currentGroup?.name}</h1>
+              <h1 className="text-2xl font-bold text-black tracking-tight">{currentGroup?.name}</h1>
               <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center space-x-1">
                 <Users className="w-3 h-3 mr-1" />
                 <span>{currentGroup?.memberCount} Members</span>
               </span>
             </div>
-            <p className="text-slate-400 text-xs max-w-2xl">
+            <p className="text-slate-400 text-sm text-black max-w-2xl">
               {currentGroup?.description || 'No description provided for this group.'}
             </p>
             {/* Group UUID Badge */}
@@ -267,28 +268,27 @@ export default function GroupDetailPage() {
 
       {/* Notifications */}
       {error && (
-        <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-400 font-semibold text-center flex items-center justify-center space-x-2">
-          <span>⚠️</span>
+        <div className="p-3 rounded-xl bg-coral-500/10 border border-coral-500/20 text-xs text-coral-400 font-semibold text-center flex items-center justify-center space-x-2">
+          <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {actionSuccess && successMessage && (
-        <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400 font-semibold text-center flex items-center justify-center space-x-2">
-          <span>✓</span>
+        <div className="p-3 rounded-xl bg-pine-500/10 border border-pine-500/20 text-xs text-pine-400 font-semibold text-center flex items-center justify-center space-x-2">
+          <Check className="w-4 h-4 shrink-0" />
           <span>{successMessage}</span>
         </div>
       )}
 
       {/* Tabs Navigation: Overview | Chat | Members | Analytics */}
-      <div className="flex border-b border-slate-800 space-x-8">
+      <div className="flex border-b border-slate-200 space-x-8">
         <button
           onClick={() => setActiveTab('overview')}
-          className={`pb-3 text-xs font-bold transition-colors cursor-pointer border-b-2 flex items-center space-x-2 ${
-            activeTab === 'overview'
-              ? 'border-brand-500 text-white'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
+          className={`pb-3 text-xs font-extrabold transition-colors cursor-pointer border-b-2 flex items-center space-x-2 ${activeTab === 'overview'
+            ? 'border-pine-500 text-pine-700'
+            : 'border-transparent text-slate-600 hover:text-black'
+            }`}
         >
           <Layers className="w-4 h-4" />
           <span>Overview</span>
@@ -296,11 +296,10 @@ export default function GroupDetailPage() {
 
         <button
           onClick={() => setActiveTab('chat')}
-          className={`pb-3 text-xs font-bold transition-colors cursor-pointer border-b-2 flex items-center space-x-2 ${
-            activeTab === 'chat'
-              ? 'border-brand-500 text-white'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
+          className={`pb-3 text-xs font-extrabold transition-colors cursor-pointer border-b-2 flex items-center space-x-2 ${activeTab === 'chat'
+            ? 'border-pine-500 text-pine-700'
+            : 'border-transparent text-slate-600 hover:text-black'
+            }`}
         >
           <MessageSquare className="w-4 h-4" />
           <span>Chat</span>
@@ -308,11 +307,10 @@ export default function GroupDetailPage() {
 
         <button
           onClick={() => setActiveTab('members')}
-          className={`pb-3 text-xs font-bold transition-colors cursor-pointer border-b-2 flex items-center space-x-2 ${
-            activeTab === 'members'
-              ? 'border-brand-500 text-white'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
+          className={`pb-3 text-xs font-extrabold transition-colors cursor-pointer border-b-2 flex items-center space-x-2 ${activeTab === 'members'
+            ? 'border-pine-500 text-pine-700'
+            : 'border-transparent text-slate-600 hover:text-black'
+            }`}
         >
           <Users className="w-4 h-4" />
           <span>Members ({groupMembers.length})</span>
@@ -320,11 +318,10 @@ export default function GroupDetailPage() {
 
         <button
           onClick={() => setActiveTab('analytics')}
-          className={`pb-3 text-xs font-bold transition-colors cursor-pointer border-b-2 flex items-center space-x-2 ${
-            activeTab === 'analytics'
-              ? 'border-brand-500 text-white'
-              : 'border-transparent text-slate-400 hover:text-slate-200'
-          }`}
+          className={`pb-3 text-xs font-extrabold transition-colors cursor-pointer border-b-2 flex items-center space-x-2 ${activeTab === 'analytics'
+            ? 'border-pine-500 text-pine-700'
+            : 'border-transparent text-slate-600 hover:text-black'
+            }`}
         >
           <BarChart3 className="w-4 h-4" />
           <span>Analytics</span>
@@ -488,11 +485,10 @@ export default function GroupDetailPage() {
                 </td>
                 <td className="p-4 text-xs font-mono text-slate-400">{member.email}</td>
                 <td className="p-4 text-xs">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${
-                    member.role === 'ADMIN'
-                      ? 'bg-red-500/10 border-red-500/20 text-red-400'
-                      : 'bg-slate-800 border-slate-700 text-slate-300'
-                  }`}>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${member.role === 'ADMIN'
+                    ? 'bg-red-500/10 border-red-500/20 text-red-400'
+                    : 'bg-slate-800 border-slate-700 text-slate-300'
+                    }`}>
                     {member.role}
                   </span>
                 </td>

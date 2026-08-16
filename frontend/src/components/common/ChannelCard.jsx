@@ -13,22 +13,19 @@ export default function ChannelCard({ channel }) {
   };
 
   return (
-    <div className="glass-panel p-6 rounded-2xl flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 relative overflow-hidden">
-      <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-        <Tv className="w-32 h-32 text-white" />
-      </div>
+    <div className="glass-panel p-6 rounded-2xl flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 relative overflow-hidden border border-midnight-700/60 bg-midnight-900/80">
 
       <img
         src={channel.thumbnail || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=150&h=150&q=80'}
         alt={channel.name}
-        className="w-24 h-24 rounded-full border-2 border-brand-500/30 object-cover shadow-glass-brand shrink-0"
+        className="w-24 h-24 rounded-full border-2 border-pine-500/40 object-cover shrink-0"
       />
 
       <div className="flex-1 space-y-3 text-center md:text-left">
         <div>
           <h2 className="text-xl font-bold text-white tracking-tight flex items-center justify-center md:justify-start space-x-2">
             <span>{channel.name}</span>
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500 inline-block animate-pulse" title="Live Analytics Sync"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-coral-500 inline-block animate-pulse" title="Live Analytics Sync"></span>
           </h2>
           <p className="text-slate-400 text-xs mt-1 leading-relaxed max-w-2xl line-clamp-3">
             {channel.description || 'No channel description provided.'}
@@ -37,23 +34,23 @@ export default function ChannelCard({ channel }) {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-3 gap-4 pt-2 max-w-md">
-          <div className="bg-slate-900/60 border border-slate-800 p-2.5 rounded-xl text-center">
-            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider flex items-center justify-center">
-              <Users className="w-3 h-3 mr-1 text-brand-400" /> Subscribers
+          <div className="bg-midnight-950/60 border border-midnight-700/60 p-2.5 rounded-xl text-center">
+            <span className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider block">
+              Subscribers
             </span>
             <span className="block text-sm font-bold text-white mt-0.5">{formatNumber(channel.subscriberCount)}</span>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 p-2.5 rounded-xl text-center">
-            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider flex items-center justify-center">
-              <Eye className="w-3 h-3 mr-1 text-emerald-400" /> Total Views
+          <div className="bg-midnight-950/60 border border-midnight-700/60 p-2.5 rounded-xl text-center">
+            <span className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider block">
+              Total Views
             </span>
             <span className="block text-sm font-bold text-white mt-0.5">{formatNumber(channel.viewCount)}</span>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 p-2.5 rounded-xl text-center">
-            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider flex items-center justify-center">
-              <Video className="w-3 h-3 mr-1 text-amber-400" /> Videos
+          <div className="bg-midnight-950/60 border border-midnight-700/60 p-2.5 rounded-xl text-center">
+            <span className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider block">
+              Videos
             </span>
             <span className="block text-sm font-bold text-white mt-0.5">{formatNumber(channel.videoCount)}</span>
           </div>

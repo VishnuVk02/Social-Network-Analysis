@@ -13,7 +13,7 @@ import {
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="glass-panel p-3 rounded-xl shadow-glass-md text-xs border border-slate-700/60 bg-dark-900/90 text-slate-300">
+      <div className="glass-panel p-3 rounded-xl shadow-glass-md text-xs border border-midnight-700 bg-midnight-900/95 text-slate-200">
         <p className="font-semibold text-white mb-1">{label}</p>
         {payload.map((item, idx) => (
           <p key={idx} className="flex justify-between space-x-4">
@@ -32,7 +32,7 @@ export default function ActivityChart({ data, xKey = 'date' }) {
     <div className="w-full h-80">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="rgba(3, 181, 170, 0.15)" vertical={false} />
           <XAxis
             dataKey={xKey}
             stroke="#94a3b8"
@@ -56,14 +56,14 @@ export default function ActivityChart({ data, xKey = 'date' }) {
           <Bar
             dataKey="posts"
             name="Posts Published"
-            fill="#059669" // Emerald 600
+            fill="#03B5AA" // Pine Green
             radius={[4, 4, 0, 0]}
             maxBarSize={30}
           />
           <Bar
             dataKey="comments"
             name="Comments Logged"
-            fill="#139767a9" // Emerald 400
+            fill="#FF8552" // Coral
             radius={[4, 4, 0, 0]}
             maxBarSize={30}
           />

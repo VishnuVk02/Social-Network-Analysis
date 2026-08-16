@@ -55,7 +55,7 @@ function OrganizationRoute({ isAuthenticated, user }) {
         <div className="w-14 h-14 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 font-black text-2xl flex items-center justify-center mx-auto">
           403
         </div>
-        <h2 className="text-xl font-bold text-white">Groups Not Available</h2>
+        <h2 className="text-xl font-bold text-black">Groups Not Available</h2>
         <p className="text-xs text-slate-400 leading-relaxed">
           Workspace groups are available exclusively for <strong className="text-emerald-400">Organization accounts</strong>. Your account type is <strong className="text-brand-400">INDIVIDUAL</strong>.
         </p>
@@ -76,7 +76,7 @@ function OrgAdminRoute({ isAuthenticated, user }) {
         <div className="w-14 h-14 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 font-black text-2xl flex items-center justify-center mx-auto">
           403
         </div>
-        <h2 className="text-xl font-bold text-white">Access Restricted</h2>
+        <h2 className="text-xl font-bold text-black">Access Restricted</h2>
         <p className="text-xs text-slate-400 leading-relaxed">
           Employee Management is restricted to Organization Administrators.
         </p>
@@ -97,7 +97,7 @@ function AdminRoute({ isAuthenticated, user }) {
         <div className="w-14 h-14 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 font-black text-2xl flex items-center justify-center mx-auto">
           403
         </div>
-        <h2 className="text-xl font-bold text-white">Access Denied</h2>
+        <h2 className="text-xl font-bold text-black">Access Denied</h2>
         <p className="text-xs text-slate-400 leading-relaxed">
           Application Analytics is restricted to System Administrators.
         </p>
@@ -112,17 +112,17 @@ function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-dark-950">
+    <div className="flex h-screen overflow-hidden bg-slate-50">
       {/* Sidebar Navigation */}
       <Sidebar isOpen={sidebarOpen} />
 
       {/* Main Content viewport */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden bg-slate-50">
         {/* Header Bar */}
         <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} isSidebarOpen={sidebarOpen} />
 
         {/* Dynamic sub-pages */}
-        <main className="flex-1 overflow-y-auto bg-transparent">
+        <main className="flex-1 overflow-y-auto bg-[#EFE9E9]">
           <Outlet />
         </main>
       </div>
@@ -147,17 +147,17 @@ export default function App() {
       <SparkleCursor />
       <Routes>
         {/* Public auth pages */}
-        <Route 
-          path="/login" 
+        <Route
+          path="/login"
           element={
             isAuthenticated ? <Navigate to="/" replace /> : <Login />
-          } 
+          }
         />
-        <Route 
-          path="/register" 
+        <Route
+          path="/register"
           element={
             isAuthenticated ? <Navigate to="/" replace /> : <Register />
-          } 
+          }
         />
 
         {/* Authenticated dashboard pages */}
@@ -168,7 +168,7 @@ export default function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/reports/:reportId" element={<ReportViewerPage />} />
-            
+
             {/* Organization-only Groups & Messages Routes */}
             <Route element={<OrganizationRoute isAuthenticated={isAuthenticated} user={user} />}>
               <Route path="/groups" element={<GroupManagement />} />

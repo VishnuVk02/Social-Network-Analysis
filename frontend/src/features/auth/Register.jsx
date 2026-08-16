@@ -139,19 +139,16 @@ export default function Register() {
     <div className="min-h-screen bg-dark-950 flex flex-col items-center justify-center p-4 relative overflow-y-auto select-none">
       
       {/* Ambient Glows */}
-      <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-brand-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-midnight-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-pine-500/15 rounded-full blur-[120px] pointer-events-none"></div>
 
       {/* Main Glass Container */}
-      <div className="w-full max-w-3xl glass-panel p-8 md:p-10 rounded-3xl shadow-2xl relative z-10 space-y-8 my-8">
+      <div className="w-full max-w-3xl glass-panel p-8 md:p-10 rounded-3xl shadow-2xl relative z-10 space-y-8 my-8 border border-midnight-700/60 bg-midnight-900/85">
         
         {/* Brand Header */}
-        <div className="flex flex-col items-center text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-glass-brand">
-            <BarChart3 className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight">Telemetron</h1>
-          <p className="text-xs md:text-sm text-slate-400">
+        <div className="text-center space-y-1">
+          <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Telemetron</h1>
+          <p className="text-xs md:text-sm text-pine-300/80">
             Cross-Platform Analytics & Intelligence Platform
           </p>
         </div>

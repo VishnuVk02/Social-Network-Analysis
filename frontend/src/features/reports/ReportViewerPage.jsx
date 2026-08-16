@@ -87,17 +87,17 @@ export default function ReportViewerPage() {
   if (error || !activeReport) {
     return (
       <div className="p-8 max-w-xl mx-auto space-y-4 text-center">
-        <div className="glass-panel p-8 rounded-2xl border border-red-500/20 bg-red-500/5 space-y-3">
-          <div className="w-12 h-12 rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center mx-auto">
+        <div className="glass-panel p-8 rounded-2xl border border-coral-500/20 bg-midnight-900/80 space-y-3">
+          <div className="w-12 h-12 rounded-2xl bg-coral-500/10 text-coral-400 flex items-center justify-center mx-auto">
             <FileText className="w-6 h-6" />
           </div>
-          <h3 className="text-base font-bold text-white">📊 Report Unavailable</h3>
-          <p className="text-xs text-red-400">{error || 'This report is no longer available or has been deleted.'}</p>
+          <h3 className="text-base font-bold text-white">Report Unavailable</h3>
+          <p className="text-xs text-coral-400">{error || 'This report is no longer available or has been deleted.'}</p>
           <button
             onClick={() => navigate('/reports')}
-            className="px-4 py-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white text-xs font-semibold"
+            className="px-4 py-2 rounded-xl bg-midnight-800 border border-midnight-700 text-slate-200 hover:text-white hover:border-pine-500/40 text-xs font-semibold cursor-pointer"
           >
-            ← Back to Saved Reports
+            Back to Saved Reports
           </button>
         </div>
       </div>

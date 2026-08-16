@@ -250,13 +250,14 @@ export default function ShareReportModal({ isOpen, onClose, reportData, isForwar
 
             {/* Notification messages */}
             {errorMsg && (
-              <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold text-center">
-                ⚠️ {errorMsg}
+              <div className="p-2.5 rounded-xl bg-coral-500/10 border border-coral-500/20 text-coral-400 text-xs font-semibold text-center flex items-center justify-center space-x-1.5">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{errorMsg}</span>
               </div>
             )}
 
             {shareSuccess && (
-              <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold text-center flex items-center justify-center space-x-2">
+              <div className="p-2.5 rounded-xl bg-pine-500/10 border border-pine-500/20 text-pine-400 text-xs font-semibold text-center flex items-center justify-center space-x-2">
                 <Check className="w-4 h-4" />
                 <span>{isForwarding ? 'Report forwarded successfully!' : 'Report shared successfully!'}</span>
               </div>

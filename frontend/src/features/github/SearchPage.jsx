@@ -115,10 +115,10 @@ export default function SearchPage() {
                       setQuery('');
                       setValidationError('');
                     }}
-                    className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+                    className={`flex items-center space-x-1.5 px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                       searchType === tab.id
-                        ? 'bg-brand-650 text-white shadow-glass'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/40'
+                        ? 'bg-pine-500 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-black hover:bg-slate-200'
                     }`}
                   >
                     <Icon className="w-3.5 h-3.5" />

@@ -11,7 +11,7 @@ import {
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="glass-panel p-3 rounded-xl shadow-glass-md text-xs border border-slate-700/60 bg-dark-900/90 text-slate-300">
+      <div className="glass-panel p-3 rounded-xl shadow-glass-md text-xs border border-midnight-700 bg-midnight-900/95 text-slate-200">
         <p className="font-semibold text-white mb-1">{payload[0].name}</p>
         <p className="flex justify-between space-x-4">
           <span className="font-medium">Ratio:</span>
@@ -27,9 +27,9 @@ const CustomTooltip = ({ active, payload }) => {
 
 export default function SentimentChart({ positive = 0, neutral = 0, negative = 0 }) {
   const data = [
-    { name: 'Positive Sentiment', value: positive, color: '#10b981' }, // Emerald
-    { name: 'Neutral Sentiment', value: neutral, color: '#f59e0b' },  // Amber
-    { name: 'Negative Sentiment', value: negative, color: '#ef4444' }  // Rose
+    { name: 'Positive Sentiment', value: positive, color: '#03B5AA' }, // Pine Green
+    { name: 'Neutral Sentiment', value: neutral, color: '#2adcd0' },  // Pine Light
+    { name: 'Negative Sentiment', value: negative, color: '#FF8552' }  // Coral
   ].filter(item => item.value > 0);
 
   return (
@@ -53,7 +53,7 @@ export default function SentimentChart({ positive = 0, neutral = 0, negative = 0
             dataKey="value"
           >
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={entry.color} stroke="rgba(15, 23, 42, 0.8)" strokeWidth={2} />
+              <Cell key={`cell-${index}`} fill={entry.color} stroke="rgba(1, 23, 24, 0.9)" strokeWidth={2} />
             ))}
           </Pie>
         </PieChart>
